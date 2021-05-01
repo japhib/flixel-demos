@@ -1,12 +1,12 @@
 package;
 
-import flash.display.Graphics;
-import flash.display.GraphicsPathCommand;
-import flash.geom.Rectangle;
-import flash.Vector;
 import flixel.FlxG;
 import flixel.math.FlxPoint;
 import flixel.util.FlxSpriteUtil;
+import openfl.Vector;
+import openfl.display.Graphics;
+import openfl.display.GraphicsPathCommand;
+import openfl.geom.Rectangle;
 
 /**
  * @author Masadow
@@ -148,11 +148,11 @@ class Grid
 
 	public function draw():Void
 	{
-		var gfx:Graphics = FlxSpriteUtil.flashGfx;
-		gfx.clear();
-		gfx.lineStyle(1, 0x01034f);
-		if (renderGrid)
-			gfx.drawPath(lineCommands, lineData);
+		// var gfx:Graphics = FlxSpriteUtil.flashGfx;
+		// gfx.clear();
+		// gfx.lineStyle(1, 0x01034f);
+		// if (renderGrid)
+		// 	gfx.drawPath(lineCommands, lineData);
 	}
 
 	public function applyDirectedForce(Position:FlxPoint, Force:FlxPoint, Radius:Float):Void

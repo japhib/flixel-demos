@@ -1,19 +1,19 @@
 package;
 
-import flash.filters.BitmapFilterQuality;
-import flash.filters.BlurFilter;
-import flash.geom.Point;
-import flash.geom.Rectangle;
-import flash.Lib;
 import flixel.FlxG;
 import flixel.FlxObject;
 import flixel.FlxSprite;
 import flixel.FlxState;
 import flixel.group.FlxGroup;
+import flixel.math.FlxPoint;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
-import flixel.math.FlxPoint;
 import flixel.util.FlxSpriteUtil;
+import openfl.Lib;
+import openfl.filters.BitmapFilterQuality;
+import openfl.filters.BlurFilter;
+import openfl.geom.Point;
+import openfl.geom.Rectangle;
 
 /**
  * @author Masadow
@@ -165,17 +165,12 @@ class ScreenState extends FlxState
 
 		super.draw();
 
-		// Apply glow effect, may cause significant framerate decrease
-		#if flash
-		_fx.stamp(FlxG.camera.screen);
-		FlxG.camera.screen.pixels.applyFilter(FlxG.camera.screen.pixels, _rect, _point, blur);
-		_fx.draw();
-		#else
-		/*_fx.stamp(FlxG.camera);
-			FlxG.camera.canvas.stage.
-			FlxG.camera.screen.pixels.applyFilter(FlxG.camera.screen.pixels, _rect, _point, blur);
-			_fx.draw(); */
-		#end
+		// // Apply glow effect, may cause significant framerate decrease
+		// #if flash
+		// _fx.stamp(FlxG.camera.screen);
+		// FlxG.camera.screen.pixels.applyFilter(FlxG.camera.screen.pixels, _rect, _point, blur);
+		// _fx.draw();
+		// #end
 	}
 
 	public function handleCollision(elapsed:Float, Object1:FlxObject, Object2:FlxObject):Void

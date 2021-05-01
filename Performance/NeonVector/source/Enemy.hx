@@ -1,9 +1,9 @@
 package;
 
-import flash.Lib;
 import flixel.FlxG;
 import flixel.math.FlxAngle;
 import flixel.util.FlxColor;
+import openfl.Lib;
 
 /**
  * @author Masadow
@@ -222,10 +222,10 @@ class Enemy extends Entity
 				}
 			}
 		}
-		else if ((Object is PlayerShip))
+		else if ((Object is PlayerShip) && IsHitBoxCollision)
 		{
-			if (IsHitBoxCollision)
-				Object.kill();
+			var playerShip = cast(Object, PlayerShip);
+			playerShip.kill();
 		}
 	}
 

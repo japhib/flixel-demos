@@ -1,10 +1,10 @@
 package;
 
-import flash.Lib;
 import flixel.FlxG;
 import flixel.math.FlxPoint;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
+import openfl.Lib;
 
 /**
  * @author Masadow
@@ -13,8 +13,9 @@ class PlayerShip extends Entity
 {
 	static inline var MULTIPLIER_EXPIRY_TIME:Float = 0.8; // amount of time it takes, in seconds, for a multiplier to expire.
 	static inline var MULTIPLIER_MAX:Int = 20;
+	static inline var MAX_LIVES:Int = 4;
 
-	public static var lives:Int = 0;
+	public static var lives:Int = MAX_LIVES;
 	public static var score:UInt = 0;
 	public static var highScore:UInt = 0;
 	public static var multiplier:Int = 0;
@@ -81,10 +82,14 @@ class PlayerShip extends Entity
 
 	override public function kill():Void
 	{
+		if (!alive)
+			return;
+
 		super.kill();
 		ScreenState.makeExplosion(Particle.NONE, position.x, position.y, 1200, Particle.HIGH_SPEED, 0xffff00, 0xffffff);
 		cooldownTimer.cancel();
-		if (lives-- < 0)
+		lives -= 1;
+		if (lives < 0)
 		{
 			isGameOver = true;
 			cooldownTimer.start(5, onTimerRestart);
@@ -122,7 +127,7 @@ class PlayerShip extends Entity
 			UserSettings.highScore = score;
 		score = 0;
 		multiplier = 1;
-		lives = 4;
+		lives = MAX_LIVES;
 		scoreForExtraLife = 2000;
 		multiplierTimeLeft = 0;
 	}
