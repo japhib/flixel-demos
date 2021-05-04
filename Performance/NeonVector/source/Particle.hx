@@ -1,6 +1,7 @@
 package;
 
 import flixel.FlxG;
+import flixel.effects.particles.FlxParticle;
 import flixel.util.FlxColor;
 import flixel.util.FlxSpriteUtil;
 import openfl.display.Graphics;
@@ -22,7 +23,7 @@ class Particle extends Entity
 	public static var index:Int = 0;
 	public static var activeCount:Int = 0;
 	public static var max:Int = 0;
-	public static var maxLifespan:Float = 3.25;
+	public static var maxLifespan:Float = .25;
 
 	public var lifespan:Float;
 	public var lineScale:Float = 0.06;
@@ -105,7 +106,7 @@ class Particle extends Entity
 	{
 		if (isGlowing)
 			super.draw(); // used for the PlayerShip's exhaust stream
-		// var gfx:Graphics = FlxSpriteUtil.flashGfx;
+		var gfx:Graphics = FlxSpriteUtil.flashGfx;
 		var _startX:Float = position.x - 0.5 * lineScale * velocity.x;
 		var _startY:Float = position.y - 0.5 * lineScale * velocity.y;
 		var _endX:Float = position.x + 0.5 * lineScale * velocity.x;
@@ -122,9 +123,9 @@ class Particle extends Entity
 		var _color = new FlxColor();
 		_color = FlxColor.interpolate(_color, lineColor, _speedRatio);
 
-		// gfx.lineStyle(3, _color);
-		// gfx.moveTo(_startX, _startY);
-		// gfx.lineTo(_endX, _endY);
+		gfx.lineStyle(3, _color);
+		gfx.moveTo(_startX, _startY);
+		gfx.lineTo(_endX, _endY);
 	}
 
 	override public function kill():Void

@@ -32,7 +32,6 @@ class ScreenState extends FlxState
 	var fpsBuffer:Array<Int>;
 	var fpsIndex:Int;
 
-	public static var grid:Grid;
 	public static var blackholes:FlxTypedGroup<Enemy>;
 	static var particles:FlxTypedGroup<Particle>;
 	static var entities:FlxGroup;
@@ -52,15 +51,10 @@ class ScreenState extends FlxState
 		fpsBuffer = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 		fpsIndex = 0;
 
-		// Neither the grid nor the particles group are added to the FlxState here. Instead, their update() and draw() routines will
+		// The particles group is not added to the FlxState here. Instead, its update() and draw() routines will
 		// be called in a custom order.
-		var _gridRect:Rectangle = new Rectangle(0, 0, FlxG.width, FlxG.height);
-		#if !js
-		grid = new Grid(_gridRect, Std.int(FlxG.width / 20), Std.int(FlxG.height / 20), 8);
-		#end
-
 		particles = new FlxTypedGroup<Particle>();
-		for (i in 0...2500)
+		for (i in 0...1000)
 			particles.add(new Particle());
 
 		entities = new FlxGroup();
@@ -105,9 +99,6 @@ class ScreenState extends FlxState
 	{
 		GameInput.update(elapsed);
 		super.update(elapsed);
-		#if !js
-		grid.update(elapsed);
-		#end
 		particles.update(elapsed);
 
 		cursor.x = FlxG.mouse.x;
@@ -154,14 +145,7 @@ class ScreenState extends FlxState
 
 	override public function draw():Void
 	{
-		#if !js
-		grid.draw();
-		#end
 		particles.draw();
-
-		#if flash
-		FlxG.camera.screen.pixels.draw(FlxSpriteUtil.flashGfxSprite);
-		#end
 
 		super.draw();
 
